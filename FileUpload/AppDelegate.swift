@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  FileUpload
 //
-//  Created by nicolocurioni on 08/02/23.
+//  Created by Nicolò Curioni on 08/02/23.
 //
 
 import UIKit

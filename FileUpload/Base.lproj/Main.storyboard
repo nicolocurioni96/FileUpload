@@ -1,24 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zVH-G7-WRa">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--File Upload-->
+        <scene sceneID="kMt-vj-lIP">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <tableViewController id="aEy-Uy-pw0" customClass="HomeController" customModule="FileUpload" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" rowHeight="87" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="Mgp-DN-VA7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FileCell" rowHeight="87" id="Se5-Xw-P4X" customClass="FileTableViewCell" customModule="FileUpload" customModuleProvider="target">
+                                <rect key="frame" x="20" y="32" width="374" height="87"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Se5-Xw-P4X" id="tR0-Od-GDi">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="87"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0z-ag-pQ6">
+                                            <rect key="frame" x="75" y="16" width="290" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="HLg-4h-pJi"/>
+                                                <constraint firstAttribute="width" constant="290" id="bd1-D9-AG2"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ch7-JZ-5so">
+                                            <rect key="frame" x="75" y="52" width="290" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="290" id="V6c-Mu-3pl"/>
+                                                <constraint firstAttribute="height" constant="24" id="was-w8-0un"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NuE-73-Oi4">
+                                            <rect key="frame" x="10" y="18" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="95T-lC-87l"/>
+                                                <constraint firstAttribute="width" constant="50" id="bg2-xV-eVB"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="F0z-ag-pQ6" firstAttribute="top" secondItem="tR0-Od-GDi" secondAttribute="top" constant="16" id="H21-JP-ktS"/>
+                                        <constraint firstAttribute="bottom" secondItem="NuE-73-Oi4" secondAttribute="bottom" constant="19" id="Re9-IL-lri"/>
+                                        <constraint firstItem="ch7-JZ-5so" firstAttribute="leading" secondItem="NuE-73-Oi4" secondAttribute="trailing" constant="15" id="TzA-g6-lRG"/>
+                                        <constraint firstItem="ch7-JZ-5so" firstAttribute="top" secondItem="F0z-ag-pQ6" secondAttribute="bottom" constant="8" symbolic="YES" id="cFK-gu-DiD"/>
+                                        <constraint firstItem="F0z-ag-pQ6" firstAttribute="leading" secondItem="NuE-73-Oi4" secondAttribute="trailing" constant="15" id="nEx-2a-cqJ"/>
+                                        <constraint firstItem="NuE-73-Oi4" firstAttribute="leading" secondItem="tR0-Od-GDi" secondAttribute="leading" constant="10" id="qJo-nZ-UVg"/>
+                                        <constraint firstItem="NuE-73-Oi4" firstAttribute="top" secondItem="tR0-Od-GDi" secondAttribute="top" constant="18" id="w4X-sZ-ES3"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageViewIcon" destination="NuE-73-Oi4" id="F3G-Gy-E3L"/>
+                                    <outlet property="labelSubtitle" destination="ch7-JZ-5so" id="2hS-oN-kOF"/>
+                                    <outlet property="labelTitle" destination="F0z-ag-pQ6" id="TaU-K2-pW4"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="aEy-Uy-pw0" id="YWv-3N-MPF"/>
+                            <outlet property="delegate" destination="aEy-Uy-pw0" id="mDr-kj-Qb6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="File Upload" id="U8e-vy-27V">
+                        <barButtonItem key="rightBarButtonItem" image="icloud.and.arrow.up.fill" catalog="system" id="Lw2-zY-v2c">
+                            <color key="tintColor" systemColor="systemGray6Color"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="uploadDocumentButton" destination="Lw2-zY-v2c" id="GwZ-fA-Kr1"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="klV-wk-F3R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="890" y="92"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yDj-Kc-BF6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zVH-G7-WRa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="f0D-p4-nG5">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="aEy-Uy-pw0" kind="relationship" relationship="rootViewController" id="bOo-gd-Agu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KsR-d8-EOA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="60.869565217391312" y="91.741071428571431"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icloud.and.arrow.up.fill" catalog="system" width="128" height="106"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
