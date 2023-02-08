@@ -12,7 +12,7 @@ class DownloadTask {
     var url: URL?
     var inProgress = false
     var resumeData: Data?
-    var task: URLSessionDataTask?
+    var task: URLSessionDownloadTask?
     
     init(file: File) {
         self.file = file

@@ -10,7 +10,7 @@ import Foundation
 class UploadTask {
     var file: File
     var inProgress = false
-    var task: URLSessionDataTask?
+    var task: URLSessionUploadTask?
     
     init(file: File) {
         self.file = file
