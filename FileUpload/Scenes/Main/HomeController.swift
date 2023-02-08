@@ -9,13 +9,17 @@ import UIKit
 
 class HomeController: UITableViewController {
     
+    // MARK: Outlets
     @IBOutlet weak var uploadDocumentButton: UIBarButtonItem!
     
+    // MARK: View Life-cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(FileTableViewCell.self, forCellReuseIdentifier: "FileCell")
     }
+    
+    // MARK: TableView DataSource & Delegate
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
