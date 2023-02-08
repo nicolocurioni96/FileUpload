@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import MobileCoreServices
+import UniformTypeIdentifiers
 
 class HomeController: UITableViewController {
     
@@ -14,7 +16,7 @@ class HomeController: UITableViewController {
     
     var file: File? = nil
     
-    var files: [File] = []
+    var files: [URL] = []
     
     // Get the documents directory
     let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -53,16 +55,37 @@ class HomeController: UITableViewController {
         didUploadData()
     }
     
+    private func uploadDocument() {
+        //        let file = File(link: "https://file.io",data: "text=this is the file content");
+        //        uploadService.start(file: file)
+    }
+    
+    private func downloadDocument() {
+        let file = File(link: "https://file.io",data: "text=this is the file content");
+        downloadService.start(file: file)
+    }
+    
     private func didUploadData() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alertController.addAction(UIAlertAction(title: "Choose file", style: .default, handler: { _ in
-            
+            self.chooseFile()
         }))
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         self.present(alertController, animated: true)
+    }
+    
+    private func chooseFile() {
+        let requiredTypes = [UTType.bmp, UTType.jpeg, UTType.pdf, UTType.tiff]
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: requiredTypes, asCopy: true)
+        
+        documentPicker.delegate = self
+        documentPicker.allowsMultipleSelection = false
+        documentPicker.shouldShowFileExtensions = true
+        
+        self.present(documentPicker, animated: true)
     }
     
     // MARK: Methods
@@ -190,5 +213,21 @@ extension HomeController: URLSessionDataDelegate {
         if let responseText = String(data: data, encoding: .utf8) {
             print("⚪️ \(responseText)")
         }
+    }
+}
+
+extension HomeController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let file = urls.first else {
+            return
+        }
+        
+        //self.files.append(file)
+        
+        print("⚠️ Import result: \(file)")
+    }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print("⚠️ Document was cancelled, during the import operation")
     }
 }
