@@ -137,10 +137,18 @@
 		A18E44032993BEBB00F4803E /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				A18E44082993C03600F4803E /* Task */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		A18E44082993C03600F4803E /* Task */ = {
+			isa = PBXGroup;
+			children = (
 				A18E44042993BECD00F4803E /* DownloadTask.swift */,
 				A18E44062993BFD800F4803E /* UploadTask.swift */,
 			);
-			path = Network;
+			path = Task;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
