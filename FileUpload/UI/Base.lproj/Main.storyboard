@@ -77,6 +77,9 @@
                     <navigationItem key="navigationItem" title="File Upload" id="U8e-vy-27V">
                         <barButtonItem key="rightBarButtonItem" image="icloud.and.arrow.up.fill" catalog="system" id="Lw2-zY-v2c">
                             <color key="tintColor" systemColor="systemGray6Color"/>
+                            <connections>
+                                <action selector="uploadFile:" destination="aEy-Uy-pw0" id="vcP-Eh-K9J"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

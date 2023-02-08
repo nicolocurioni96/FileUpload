@@ -124,8 +124,8 @@
 		A18E43FE2993BD4300F4803E /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				A18E43EC2993B45100F4803E /* LaunchScreen.storyboard */,
 				A18E43E72993B44F00F4803E /* Main.storyboard */,
+				A18E43EC2993B45100F4803E /* LaunchScreen.storyboard */,
 			);
 			path = UI;
 			sourceTree = "<group>";
