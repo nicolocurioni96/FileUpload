@@ -58,13 +58,11 @@
 		A18E43E02993B44F00F4803E /* FileUpload */ = {
 			isa = PBXGroup;
 			children = (
-				A18E43E12993B44F00F4803E /* AppDelegate.swift */,
+				A18E43FD2993BD2700F4803E /* App */,
 				A18E43F72993B83600F4803E /* Components */,
-				A18E43E32993B44F00F4803E /* SceneDelegate.swift */,
-				A18E43F52993B74600F4803E /* HomeController.swift */,
-				A18E43E72993B44F00F4803E /* Main.storyboard */,
+				A18E43FB2993BD0500F4803E /* Scenes */,
+				A18E43FE2993BD4300F4803E /* UI */,
 				A18E43EA2993B45100F4803E /* Assets.xcassets */,
-				A18E43EC2993B45100F4803E /* LaunchScreen.storyboard */,
 				A18E43EF2993B45100F4803E /* Info.plist */,
 			);
 			path = FileUpload;
@@ -84,6 +82,40 @@
 				A18E43F92993B87B00F4803E /* FileTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		A18E43FB2993BD0500F4803E /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				A18E43FC2993BD1300F4803E /* Main */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		A18E43FC2993BD1300F4803E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				A18E43F52993B74600F4803E /* HomeController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		A18E43FD2993BD2700F4803E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A18E43E12993B44F00F4803E /* AppDelegate.swift */,
+				A18E43E32993B44F00F4803E /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A18E43FE2993BD4300F4803E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A18E43EC2993B45100F4803E /* LaunchScreen.storyboard */,
+				A18E43E72993B44F00F4803E /* Main.storyboard */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
