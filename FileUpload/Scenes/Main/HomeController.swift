@@ -16,7 +16,7 @@ class HomeController: UITableViewController {
     
     var file: File? = nil
     
-    var files: [URL] = []
+    var files: [DocumentFile] = []
     
     // Get the documents directory
     let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -42,8 +42,6 @@ class HomeController: UITableViewController {
     // MARK: View Life-cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.register(FileTableViewCell.self, forCellReuseIdentifier: "FileCell")
         
         // Set the URLSession on the download service
         downloadService.downloadSession = downloadSession
@@ -103,7 +101,10 @@ class HomeController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell", for: indexPath) as! FileTableViewCell
+        let document = self.files[indexPath.row]
         
+        cell.labelTitle.text = document.name
+        cell.labelSubtitle.text = "\(document.size) MB"
         
         return cell
     }
@@ -222,9 +223,26 @@ extension HomeController: UIDocumentPickerDelegate {
             return
         }
         
-        //self.files.append(file)
+        let fileName = file.deletingPathExtension().lastPathComponent
         
-        print("⚠️ Import result: \(file)")
+        do {
+            let attribute = try FileManager.default.attributesOfItem(atPath: file.path)
+            
+            if let size = attribute[FileAttributeKey.size] as? NSNumber {
+                let fileSizeInMB = size.doubleValue / 1000000.0
+                
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.files.append(DocumentFile(name: fileName, size: fileSizeInMB))
+                    self.tableView.reloadData()
+                }
+                
+                print("⚠️ Import result: \(fileName) with \(fileSizeInMB) MB of size")
+            }
+        } catch {
+            print("Error: \(error)")
+        }
     }
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
