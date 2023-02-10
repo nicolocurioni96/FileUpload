@@ -8,6 +8,7 @@
 import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
+import Photos
 
 class HomeController: UITableViewController {
     
@@ -15,8 +16,8 @@ class HomeController: UITableViewController {
     @IBOutlet weak var uploadDocumentButton: UIBarButtonItem!
     
     var file: File? = nil
-    
     var files: [DocumentFile] = []
+    var imagePicker = UIImagePickerController()
     
     // Get the documents directory
     let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -46,6 +47,8 @@ class HomeController: UITableViewController {
         // Set the URLSession on the download service
         downloadService.downloadSession = downloadSession
         uploadService.uploadSession = uploadSession
+        
+        imagePicker.delegate = self
     }
     
     // MARK: IBActions
@@ -70,6 +73,10 @@ class HomeController: UITableViewController {
             self.chooseFile()
         }))
         
+        alertController.addAction(UIAlertAction(title: "Choose image", style: .default, handler: { _ in
+            self.chooseImageFromGallery()
+        }))
+        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         self.present(alertController, animated: true)
@@ -86,11 +93,27 @@ class HomeController: UITableViewController {
         self.present(documentPicker, animated: true)
     }
     
+    private func chooseImageFromGallery() {
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.allowsEditing = false
+            
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: Methods
     
     // Return the documents path + file name
     func localFilePath(for url: URL) -> URL {
         return documentPath.appendingPathComponent(url.lastPathComponent)
+    }
+    
+    private func getImageFileSize(from asset: PHAsset) -> Double {
+        let resource = PHAssetResource.assetResources(for: asset)
+        let imageSizeByte = resource.first?.value(forKey: "fileSize") as! Double
+        let imageSizeMB = imageSizeByte / (1024.0 * 1024.0)
+        return imageSizeMB
     }
     
     // MARK: TableView DataSource & Delegate
@@ -103,7 +126,9 @@ class HomeController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell", for: indexPath) as! FileTableViewCell
         let document = self.files[indexPath.row]
         
+        cell.labelTitle.adjustsFontSizeToFitWidth = true
         cell.labelTitle.text = document.name
+        cell.imageViewIcon.image = UIImage(data: document.data ?? Data())
         cell.labelSubtitle.text = "\(document.size) MB"
         
         return cell
@@ -217,6 +242,7 @@ extension HomeController: URLSessionDataDelegate {
     }
 }
 
+// MARK: UIDocumentPickerDelegate
 extension HomeController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let file = urls.first else {
@@ -234,7 +260,7 @@ extension HomeController: UIDocumentPickerDelegate {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     
-                    self.files.append(DocumentFile(name: fileName, size: fileSizeInMB))
+                    self.files.append(DocumentFile(name: fileName, size: fileSizeInMB, data: file.dataRepresentation))
                     self.tableView.reloadData()
                 }
                 
@@ -247,5 +273,36 @@ extension HomeController: UIDocumentPickerDelegate {
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         print("⚠️ Document was cancelled, during the import operation")
+    }
+}
+
+// MARK: UINavigationControllerDelegate &  UIImagePickerControllerDelegate
+extension HomeController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        guard let image = info[.originalImage] as? UIImage else {
+            /// Don't use `fatalError` in Production!
+            /// Use only for Debug purposes.
+            fatalError("⚠️ Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        
+        guard let imageData = image.pngData(),
+        let asset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else {
+            return
+        }
+     
+        let assetResources = PHAssetResource.assetResources(for: asset)
+            
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            self.files.append(DocumentFile(name: assetResources.first?.originalFilename ?? "", size: self.getImageFileSize(from: asset), data: imageData))
+            self.tableView.reloadData()
+        }
     }
 }
